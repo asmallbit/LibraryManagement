@@ -1,6 +1,6 @@
-#include "include/borrow.h"
-#include "include/library.h"
-#include "include/rest.h"
+#include "../include/borrow.h"
+#include "../include/library.h"
+#include "../include/rest.h"
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -1,10 +1,23 @@
 #ifndef BORROW_H
 #define BORROW_H
-#include "library.h"
+#ifndef LIBRARY_H
+
+//定义图书的结构体
+struct Book;
+typedef struct Book *PBookNode;
+struct Book
+{
+    char *bookName, *author;
+    int index, exist, inventory;
+    //exist 现存量      inventory   库存量
+    PBookNode next;
+};
+typedef struct Book *PBook;
+
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define NULL ((void *)0)
 
 //定义学生借书的结构体
 struct Borrow;

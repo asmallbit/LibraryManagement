@@ -1,4 +1,4 @@
-#include "include/library.h"
+#include "../include/library.h"
 #include <stdio.h>
 
 //初始化图书馆的书
