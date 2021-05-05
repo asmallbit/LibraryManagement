@@ -1,0 +1,2 @@
+C:\msys64\mingw64\bin\ar.exe qc libAllFunctions.a CMakeFiles/AllFunctions.dir/borrow.c.obj CMakeFiles/AllFunctions.dir/library.c.obj CMakeFiles/AllFunctions.dir/rest.c.obj
+C:\msys64\mingw64\bin\ranlib.exe libAllFunctions.a

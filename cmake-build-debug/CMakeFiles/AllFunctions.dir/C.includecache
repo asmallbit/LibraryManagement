@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/OneDrive_jianweihan/ProgrammingAndTools/C/Vscode7Final/library/include/borrow.h
+library.h
+D:/OneDrive_jianweihan/ProgrammingAndTools/C/Vscode7Final/library/include/library.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
+D:/OneDrive_jianweihan/ProgrammingAndTools/C/Vscode7Final/library/include/library.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
+D:/OneDrive_jianweihan/ProgrammingAndTools/C/Vscode7Final/library/src/borrow.c
+../include/borrow.h
+D:/OneDrive_jianweihan/ProgrammingAndTools/C/Vscode7Final/library/include/borrow.h
+
+D:/OneDrive_jianweihan/ProgrammingAndTools/C/Vscode7Final/library/src/library.c
+../include/library.h
+D:/OneDrive_jianweihan/ProgrammingAndTools/C/Vscode7Final/library/include/library.h
+stdio.h
+-
+

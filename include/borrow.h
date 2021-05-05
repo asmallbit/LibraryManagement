@@ -1,19 +1,20 @@
 #ifndef BORROW_H
 #define BORROW_H
 #ifndef LIBRARY_H
-
-//定义图书的结构体
-struct Book;
-typedef struct Book *PBookNode;
-struct Book
-{
-    char *bookName, *author;
-    int index, exist, inventory;
-    //exist 现存量      inventory   库存量
-    PBookNode next;
-};
-typedef struct Book *PBook;
-
+#include "library.h"
+/*
+** //定义图书的结构体
+** struct Book;
+** typedef struct Book *PBookNode;
+** struct Book
+** {
+**     char *bookName, *author;
+**     int index, exist, inventory;
+**     //exist 现存量      inventory   库存量
+**     PBookNode next;
+** };
+** typedef struct Book *PBook;
+*/
 #endif
 #include <stdio.h>
 #include <stdlib.h>

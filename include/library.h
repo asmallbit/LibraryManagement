@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#ifndef BORROW_H
 
 //定义图书的结构体
 struct Book;
@@ -15,6 +16,8 @@ struct Book
     PBookNode next;
 };
 typedef struct Book *PBook;
+
+//#endif
 
 //初始化图书馆的书
 PBook initBook(int namel, int authorl);
