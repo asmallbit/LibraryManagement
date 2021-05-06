@@ -9,12 +9,13 @@
 
 //最后还书期限 UNIX时间戳 2022.5.30
 #define MAXDEADLINE 1654012800
-
+//书名所能容纳的最大值
+#define MAXWORDS 100
 int main()
 {
-    PBook book, node, bookStack;
+    PBook book, node, bookStack, tempStack;
     PBorrow borrow, borrowNode, borrowStack, borrowStackNode;
-    char *input=NULL, *bookname=NULL, *author=NULL; //*buffer
+    char *input = NULL, bookname[MAXWORDS], author[MAXWORDS];
     int index, number, id, date, option, choice, dateSeconds;
     time_t temp;
     borrowStack = initBorrow();
@@ -37,7 +38,8 @@ int main()
         if (strcmp(input, "1") == 0)
         {
             printf("请输入您想查询的书籍名称: ");
-            bookname = getString();
+            //bookname = getString();
+            safetyScanfString(bookname);
             node = getIndexBookName(book, bookname);
             if (node != NULL)
             {
@@ -53,7 +55,7 @@ int main()
         {
             printf("请输入要查询图书的书号: ");
             //scanf("%d", &index);
-            safetyScanf(&index, 1);
+            safetyScanf(&index);
             node = getIndexIndex(book, index);
             if (node != NULL)
             {
@@ -68,7 +70,8 @@ int main()
         else if (strcmp(input, "3") == 0)
         {
             printf("请输入要查询图书的作者: ");
-            author = getString();
+            //author = getString();
+            safetyScanfString(author);
             node = getIndexAuthor(book, bookStack, author);
             if (bookStack->next != NULL)
             {
@@ -78,21 +81,31 @@ int main()
             {
                 printf("没有此藏书\n");
             }
+            //清空栈
+            node = node->next;
+            while (node!=NULL){
+                tempStack = node->next;
+                free(node);
+                node = tempStack;
+            }
+            bookStack->next = NULL;
         }
         //书籍入库
         else if (strcmp(input, "4") == 0)
         {
             printf("请输入您要入库的书籍信息:\n书号: ");
             //scanf("%d", &index);
-            safetyScanf(&index, 1);
+            safetyScanf(&index);
             //buffer = getString();
             printf("书名: ");
-            bookname = getString();
+            //bookname = getString();
+            safetyScanfString(bookname);
             printf("作者: ");
-            author = getString();
+            //author = getString();
+            safetyScanfString(author);
             printf("数量(本数): ");
             //scanf("%d", &number);
-            safetyScanf(&number, 1);
+            safetyScanf(&number);
             if (getStock(book, index, bookname, author, number))
             {
                 printf("入库成功!\n");
@@ -108,7 +121,7 @@ int main()
         label2:
             printf("你想要通过那种方式查找你要借的书: 1.书名\t2.书号(请输入1或2)\n");
             //scanf("%d", &choice);
-            safetyScanf(&choice, 1);
+            safetyScanf(&choice);
             //buffer = getString();
             if (choice == 1)
             {
@@ -116,14 +129,15 @@ int main()
                 printf("你选择了通过书名的方式借书\n");
                 printf("请输入你的借书证号: ");
                 //scanf("%d", &id);
-                safetyScanf(&id, 1);
+                safetyScanf(&id);
             label3:
                 printf("请输入你计划的归还日期(8位数, 如20210101代表2020年1月1日): ");
                 //scanf("%d", &date);
-                safetyScanf(&date, 1);
-                if(!isTrueDate(date)){
+                safetyScanf(&date);
+                if (!isTrueDate(date))
+                {
                     printf("您输入的并不是一个正确的日期,请重新输入\n");
-                    goto  label3;
+                    goto label3;
                 }
                 dateSeconds = intToTime(date);
                 if (dateSeconds > MAXDEADLINE || dateSeconds < getTime())
@@ -140,7 +154,8 @@ int main()
                 }
                 //buffer = getString();
                 printf("请输入你要借的书的书名 ");
-                bookname = getString();
+                //bookname = getString();
+                safetyScanfString(bookname);
                 if (getBorrow(book, borrow, bookname, id, date, index, choice))
                 {
                     printf("借书成功!\n");
@@ -157,14 +172,15 @@ int main()
                 printf("你选择了通过书号的方式借书\n");
                 printf("请输入你的借书证号: ");
                 //scanf("%d", &id);
-                safetyScanf(&id, 1);
+                safetyScanf(&id);
             label4:
                 printf("请输入你计划的归还日期(8位数, 如20210101代表2021年1月1日): ");
                 //scanf("%d", &date);
-                safetyScanf(&date, 1);
-                if(!isTrueDate(date)){
+                safetyScanf(&date);
+                if (!isTrueDate(date))
+                {
                     printf("您输入的并不是一个正确的日期,请重新输入\n");
-                    goto  label4;
+                    goto label4;
                 }
                 dateSeconds = intToTime(date);
                 if (dateSeconds > MAXDEADLINE || dateSeconds < getTime())
@@ -181,7 +197,7 @@ int main()
                 }
                 printf("请输入你要借的书的书号");
                 //scanf("%d", &index);
-                safetyScanf(&index, 1);
+                safetyScanf(&index);
                 if (getBorrow(book, borrow, bookname, id, date, index, choice))
                 {
                     printf("借书成功!\n");
@@ -204,13 +220,14 @@ int main()
         {
         label5:
             printf("请输入要归还的书的书名: ");
-            bookname = getString();
+            //bookname = getString();
+            safetyScanfString(bookname);
             printf("请输入你的借书证号(ID): ");
             //scanf("%d", &id);
-            safetyScanf(&id, 1);
+            safetyScanf(&id);
             //printf("请输入归还日期:\n");
             //scanf("%d", &date);
-            //safetyScanf(&date, 1);
+            //safetyScanf(&date);
 
             //Need Test!!!!!!
             time(&temp);
@@ -227,7 +244,7 @@ int main()
         {
             printf("请输入您的借书证号: ");
             //scanf("%d", &id);
-            safetyScanf(&id, 1);
+            safetyScanf(&id);
             borrowNode = borrow->next;
             while (borrowNode != NULL)
             {
@@ -278,17 +295,21 @@ int main()
                 freePBook(book);
                 freePBorrow(borrow);
                 //释放bookname, input author 考虑第一次运行时bookname等指针没有申请空间的情况   待补充
-                if(input!=NULL){
-                    free(input);
-                }
-                if(author!=NULL){
-                    free(author);
-                }
-                if(bookname!=NULL){
-                    free(bookname);
-                }
+                /**
+                **    if(author!=NULL){
+                **        free(author);
+                **    }
+                **    if(bookname!=NULL){
+                **        free(bookname);
+                **    }
+                **/
             }
         }
         printf("\n**************************************\n");
     }
+    if (input != NULL)
+    {
+        free(input);
+    }
+    return 0;
 }
