@@ -15,7 +15,8 @@ int main()
     PBook book, node, bookStack;
     PBorrow borrow, borrowNode, borrowStack, borrowStackNode;
     char *input=NULL, *bookname=NULL, *author=NULL; //*buffer
-    int index, number, id, date, option, choice, counter, dateSeconds;
+    int index, number, id, date, option, choice, dateSeconds;
+    time_t temp;
     borrowStack = initBorrow();
     borrow = initBorrow();
     book = (PBook)malloc(sizeof(struct Book));
@@ -158,7 +159,7 @@ int main()
                 //scanf("%d", &id);
                 safetyScanf(&id, 1);
             label4:
-                printf("请输入你计划的归还日期(8位数, 如20210101代表2020年1月1日): ");
+                printf("请输入你计划的归还日期(8位数, 如20210101代表2021年1月1日): ");
                 //scanf("%d", &date);
                 safetyScanf(&date, 1);
                 if(!isTrueDate(date)){
@@ -207,9 +208,13 @@ int main()
             printf("请输入你的借书证号(ID): ");
             //scanf("%d", &id);
             safetyScanf(&id, 1);
-            printf("请输入归还日期:\n");
+            //printf("请输入归还日期:\n");
             //scanf("%d", &date);
-            safetyScanf(&date, 1);
+            //safetyScanf(&date, 1);
+
+            //Need Test!!!!!!
+            time(&temp);
+            temp = timeToInt((int)temp);
             option = getRestore(book, borrow, bookname, id, date);
             if (option == 1)
             {
