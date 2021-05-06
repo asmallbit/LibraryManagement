@@ -14,7 +14,7 @@ int main()
 {
     PBook book, node, bookStack;
     PBorrow borrow, borrowNode, borrowStack, borrowStackNode;
-    char *input, *bookname, *author, *buffer;
+    char *input=NULL, *bookname=NULL, *author=NULL; //*buffer
     int index, number, id, date, option, choice, counter, dateSeconds;
     borrowStack = initBorrow();
     borrow = initBorrow();
@@ -51,7 +51,8 @@ int main()
         else if (strcmp(input, "2") == 0)
         {
             printf("请输入要查询图书的书号: ");
-            scanf("%d", &index);
+            //scanf("%d", &index);
+            safetyScanf(&index, 1);
             node = getIndexIndex(book, index);
             if (node != NULL)
             {
@@ -81,14 +82,16 @@ int main()
         else if (strcmp(input, "4") == 0)
         {
             printf("请输入您要入库的书籍信息:\n书号: ");
-            scanf("%d", &index);
-            buffer = getString();
+            //scanf("%d", &index);
+            safetyScanf(&index, 1);
+            //buffer = getString();
             printf("书名: ");
             bookname = getString();
             printf("作者: ");
             author = getString();
             printf("数量(本数): ");
-            scanf("%d", &number);
+            //scanf("%d", &number);
+            safetyScanf(&number, 1);
             if (getStock(book, index, bookname, author, number))
             {
                 printf("入库成功!\n");
@@ -103,19 +106,22 @@ int main()
         {
         label2:
             printf("你想要通过那种方式查找你要借的书: 1.书名\t2.书号(请输入1或2)\n");
-            scanf("%d", &choice);
-            buffer = getString();
+            //scanf("%d", &choice);
+            safetyScanf(&choice, 1);
+            //buffer = getString();
             if (choice == 1)
             {
                 //通过书名方式借书
                 printf("你选择了通过书名的方式借书\n");
                 printf("请输入你的借书证号: ");
-                scanf("%d", &id);
+                //scanf("%d", &id);
+                safetyScanf(&id, 1);
             label3:
                 printf("请输入你计划的归还日期(8位数, 如20210101代表2020年1月1日): ");
-                scanf("%d", &date);
+                //scanf("%d", &date);
+                safetyScanf(&date, 1);
                 if(!isTrueDate(date)){
-                    printf("您输入的并不是一个正确的日期,请重新输入");
+                    printf("您输入的并不是一个正确的日期,请重新输入\n");
                     goto  label3;
                 }
                 dateSeconds = intToTime(date);
@@ -131,7 +137,7 @@ int main()
                     }
                     goto label3;
                 }
-                buffer = getString();
+                //buffer = getString();
                 printf("请输入你要借的书的书名 ");
                 bookname = getString();
                 if (getBorrow(book, borrow, bookname, id, date, index, choice))
@@ -149,10 +155,12 @@ int main()
                 //通过书号方式借书
                 printf("你选择了通过书号的方式借书\n");
                 printf("请输入你的借书证号: ");
-                scanf("%d", &id);
+                //scanf("%d", &id);
+                safetyScanf(&id, 1);
             label4:
                 printf("请输入你计划的归还日期(8位数, 如20210101代表2020年1月1日): ");
-                scanf("%d", &date);
+                //scanf("%d", &date);
+                safetyScanf(&date, 1);
                 if(!isTrueDate(date)){
                     printf("您输入的并不是一个正确的日期,请重新输入\n");
                     goto  label4;
@@ -171,7 +179,8 @@ int main()
                     goto label4;
                 }
                 printf("请输入你要借的书的书号");
-                scanf("%d", &index);
+                //scanf("%d", &index);
+                safetyScanf(&index, 1);
                 if (getBorrow(book, borrow, bookname, id, date, index, choice))
                 {
                     printf("借书成功!\n");
@@ -196,9 +205,11 @@ int main()
             printf("请输入要归还的书的书名: ");
             bookname = getString();
             printf("请输入你的借书证号(ID): ");
-            scanf("%d", &id);
+            //scanf("%d", &id);
+            safetyScanf(&id, 1);
             printf("请输入归还日期:\n");
-            scanf("%d", &date);
+            //scanf("%d", &date);
+            safetyScanf(&date, 1);
             option = getRestore(book, borrow, bookname, id, date);
             if (option == 1)
             {
@@ -210,7 +221,8 @@ int main()
         else if (strcmp(input, "7") == 0)
         {
             printf("请输入您的借书证号: ");
-            scanf("%d", &id);
+            //scanf("%d", &id);
+            safetyScanf(&id, 1);
             borrowNode = borrow->next;
             while (borrowNode != NULL)
             {
@@ -250,16 +262,26 @@ int main()
                 printf("您的输入有误,请重新输入\n");
                 goto label1;
             }
-            else if (strcmp(input, "\0") == 0)
+            if (strcmp(input, "\0") == 0)
             {
+                printf("错误输入,请重新输入: ");
                 goto label;
             }
-            else
+            if (strcmp(input, "q") == 0)
             {
                 //程序即将退出,释放当前的指针
                 freePBook(book);
                 freePBorrow(borrow);
-                //释放bookname, input, buffer, author 考虑第一次运行时bookname等指针没有申请空间的情况   待补充
+                //释放bookname, input author 考虑第一次运行时bookname等指针没有申请空间的情况   待补充
+                if(input!=NULL){
+                    free(input);
+                }
+                if(author!=NULL){
+                    free(author);
+                }
+                if(bookname!=NULL){
+                    free(bookname);
+                }
             }
         }
         printf("\n**************************************\n");

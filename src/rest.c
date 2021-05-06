@@ -32,7 +32,8 @@ int isTrueDate(int num)
     {
         return 0;
     }
-    if (month > 12){
+    if (month > 12)
+    {
         return 0;
     }
     return 1;
@@ -66,17 +67,17 @@ int intToTime(int num)
     //东八区时间 3600*8=28800
     if (!leap(trueYear))
     {
-        now = (getDaysInYear(month, day) + (year - leapyears) * 365 + leapyears * 366) * 86400+28800;
+        now = (getDaysInYear(month, day) + (year - leapyears) * 365 + leapyears * 366) * 86400 + 28800;
     }
     else
     {
         if (month > 2)
         {
-            now = (getDaysInYear(month, day) + (year - leapyears) * 365 + leapyears * 366 + 1) * 86400+28800;
+            now = (getDaysInYear(month, day) + (year - leapyears) * 365 + leapyears * 366 + 1) * 86400 + 28800;
         }
         else
         {
-            now = (getDaysInYear(month, day) + (year - leapyears) * 365 + leapyears * 366) * 86400+28800;
+            now = (getDaysInYear(month, day) + (year - leapyears) * 365 + leapyears * 366) * 86400 + 28800;
         }
     }
     return now;
@@ -201,4 +202,53 @@ char *getString(void)
     }
     str1[i - 1] = '\0';
     return str1;
+}
+
+//scanf的安全替代 1为整形, 2为字符串类型, 3为字符类型
+void safetyScanf(int *in, int option)
+{
+    int choice, flag = 0;
+    if (option == 1)
+    {
+        while (flag == 0)
+        {
+            flag = scanf("%d", in);
+            while ((choice = getchar()) != '\n' && choice != EOF)
+                ; //清楚缓存
+            if (flag == 0)
+            {
+                printf("输入错误,请重新输入: ");
+            }
+        }
+    }
+    else if (option == 2)
+    {
+        while (flag == 0)
+        {
+            flag = scanf("%s", in);
+            while ((choice = getchar()) != '\n' && choice != EOF)
+                ;
+            if (flag == 0)
+            {
+                printf("输入错误,请重新输入: ");
+            }
+        }
+    }
+    else if (option == 3)
+    {
+        while (flag == 0)
+        {
+            flag = scanf("%c", in);
+            while ((choice = getchar()) != '\n' && choice != EOF)
+                ;
+            if (flag == 0)
+            {
+                printf("输入错误,请重新输入: ");
+            }
+        }
+    }
+    else
+    {
+        printf("参数option错误\n");
+    }
 }

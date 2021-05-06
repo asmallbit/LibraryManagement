@@ -27,5 +27,7 @@ int intToTime(int num);
 int timeToInt(int date);
 //输入处理
 char *getString(void);
+//scanf的安全替代 1为整形, 2为字符串类型, 3为字符类型
+void safetyScanf(int* in, int option);
 
 #endif

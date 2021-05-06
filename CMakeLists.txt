@@ -11,7 +11,7 @@ INCLUDE_DIRECTORIES("include")
 # 添加 src 子目录
 # add_subdirectory(src)
 
-# set environment variable，设置环境变量，编译用到的源文件全部都要放到这里，否则编译能够通过，但是执行的时候会出现各种问题，比如"symbol lookup error xxxxx , undefined symbol"
+# set environment variable，设置环境变量，编译用到的源文件全部都要放到这里，否则编译能够通过，但是执行的时候会出现各种问题，比如"symbol lookup error , undefined symbol"
 # SET(library ${DIR_SRCS})
 
 # 4.设置源文件
