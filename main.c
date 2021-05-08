@@ -14,9 +14,9 @@
 int main()
 {
     PBook book, node, bookStack, tempStack;
-    PBorrow borrow, borrowNode, borrowStack, borrowStackNode;
-    char *input = NULL, bookname[MAXWORDS], author[MAXWORDS];
-    int index, number, id, date, option, choice, dateSeconds;
+    PBorrow borrow, borrowNode, borrowStack, borrowStackNode, borrowStackNodeBegin;
+    char input[MAXWORDS], bookname[MAXWORDS], author[MAXWORDS];
+    int index, number, id, date, option, choice, dateSeconds, counter=0;
     time_t temp;
     borrowStack = initBorrow();
     borrow = initBorrow();
@@ -25,15 +25,14 @@ int main()
     bookStack = (PBook)malloc(sizeof(struct Book));
     bookStack->next = NULL;
     printf("*****************图书管理系统*****************\n");
-    printf("按回车键开始\n");
-    input = getString();
-    while (strcmp(input, "q") != 0)
+    //safetyScanfString(input);
+    while (strcmp(input, "9") != 0)
     {
     label1:
         printf("菜单:\n1.根据书名查询图书信息\n2.根据书号查询图书信息\n3.根据作者查询图书信息\n4.书籍入库\n5.借阅书籍\n6.归还书籍\n");
-        printf("7.根据借书证号获取借书信息\n8.打印当前所有藏书\nq.退出\n请输入您需要的选项: ");
+        printf("7.根据借书证号获取借书信息\n8.打印当前所有藏书\n9.退出\n请输入您需要的选项: ");
     label:
-        input = getString();
+        safetyScanfString(input);
         //根据书名查询图书信息
         if (strcmp(input, "1") == 0)
         {
@@ -83,7 +82,8 @@ int main()
             }
             //清空栈
             node = node->next;
-            while (node!=NULL){
+            while (node != NULL)
+            {
                 tempStack = node->next;
                 free(node);
                 node = tempStack;
@@ -119,7 +119,7 @@ int main()
         else if (strcmp(input, "5") == 0)
         {
         label2:
-            printf("你想要通过那种方式查找你要借的书: 1.书名\t2.书号(请输入1或2)\n");
+            printf("你想要通过哪种方式查找你要借的书: 1.书名\t2.书号(请输入1或2)\n");
             //scanf("%d", &choice);
             safetyScanf(&choice);
             //buffer = getString();
@@ -161,10 +161,12 @@ int main()
                     printf("借书成功!\n");
                     getBorrowDate();
                 }
+                /*
                 else
                 {
                     printf("暂时没有此书籍,借书失败\n");
                 }
+                 */
             }
             else if (choice == 2)
             {
@@ -257,17 +259,22 @@ int main()
             borrowStackNode = borrowStack->next;
             if (borrowStackNode == NULL)
             {
-                printf("您当前尚未借阅此书籍");
+                printf("您当前尚未借阅任何书籍");
             }
             else
             {
                 printf("您的借书有:\n");
-                printf("书号\t书名\n");
+                printf("书号\t书名\t作者\n");
                 while (borrowStackNode != NULL)
                 {
-                    printf("%d\t%s\n", borrowStackNode->book.index, borrowStackNode->book.bookName);
+                    printf("%d\t%s\t%s\n", borrowStackNode->book.index, borrowStackNode->book.bookName, borrowStackNode->book.author);
                     borrowStackNode = borrowStackNode->next;
                 }
+            }
+            if(borrowStack->next!=NULL) {
+                //释放掉borrowStackNode
+                freePBorrow(borrowStack);
+                borrowStack->next = NULL;
             }
         }
         //打印当前所有藏书
@@ -279,7 +286,7 @@ int main()
         //退出即错误输入的处理
         else
         {
-            if (strcmp(input, "q") != 0 && strcmp(input, "\0") != 0)
+            if (strcmp(input, "9") != 0 && strcmp(input, "\0") != 0)
             {
                 printf("您的输入有误,请重新输入\n");
                 goto label1;
@@ -289,7 +296,7 @@ int main()
                 printf("错误输入,请重新输入: ");
                 goto label;
             }
-            if (strcmp(input, "q") == 0)
+            if (strcmp(input, "9") == 0)
             {
                 //程序即将退出,释放当前的指针
                 freePBook(book);
@@ -306,10 +313,6 @@ int main()
             }
         }
         printf("\n**************************************\n");
-    }
-    if (input != NULL)
-    {
-        free(input);
     }
     return 0;
 }

@@ -222,12 +222,13 @@ void safetyScanf(int *in)
 
 void safetyScanfString(char *str)
 {
-    int choice, flag = 0;
+    char *flag = NULL;
     while (flag == 0)
     {
-        flag = scanf("%s", str);
-        while ((choice = getchar()) != '\n' && choice != EOF)
-            ; //清除缓存
+        //flag = scanf("%s", str);
+        flag = gets(str);
+        //while ((choice = getchar()) != '\n' && choice != EOF)
+        //; //清除缓存
         if (flag == 0)
         {
             printf("输入错误,请重新输入: ");
