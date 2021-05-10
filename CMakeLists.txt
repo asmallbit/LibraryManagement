@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 3.19)
 # 2.project name，指定项目的名称，一般和项目的文件夹名称对应
 PROJECT(library)
 
+# GBK编码
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexec-charset=GBK")
+
 # 3.head file path，头文件目录
 INCLUDE_DIRECTORIES("C:/msys64/mingw64/include")    # 依赖于自己的mingw64安装路径
 INCLUDE_DIRECTORIES("include")

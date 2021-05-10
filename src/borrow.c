@@ -34,7 +34,7 @@ int getBorrow(PBook p, PBorrow pb, char *bookname, int id, int date, int index, 
 {
     PBookNode book;
     PBorrow stu, temp;
-    int i = 0;
+    //int i = 0;
     if (option == 1)
     {
         book = getIndexBookName(p, bookname);
@@ -117,7 +117,6 @@ int delBorrower(PBorrow p, char *bookname, int id)
     }
     PBorrowNode temp, pre = p;
     p = p->next;
-    int i;
     while (p != NULL)
     {
         if (strcmp(p->book.bookName, bookname) == 0 || p->id == id)
@@ -131,6 +130,7 @@ int delBorrower(PBorrow p, char *bookname, int id)
         pre = p;
         p = p->next;
     }
+    return 1;
 }
 
 //归还
