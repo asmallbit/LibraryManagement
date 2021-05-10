@@ -9,6 +9,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexec-charset=GBK")
 
 # 3.head file path，头文件目录
 INCLUDE_DIRECTORIES("C:/msys64/mingw64/include")    # 依赖于自己的mingw64安装路径
+#INCLUDE_DIRECTORIES("CStandardLibrary/include")	#弃用
 INCLUDE_DIRECTORIES("include")
 
 # 添加 src 子目录
@@ -29,6 +30,7 @@ SET(headers
         include/borrow.h
         include/rest.h
         C:/msys64/mingw64/include       # 依赖于自己的mingw64安装路径
+        #CStandardLibrary/include		#弃用
 )
 
 # 6.创建静态库

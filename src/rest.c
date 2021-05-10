@@ -119,7 +119,7 @@ int getDaysInYear(int month, int date)
 int leap(int year) //判断是否为闰年
 {
     int leap;
-    leap = (year % 4 == 0 && year % 100 != 0 || year % 400 == 0);
+    leap = ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
     return leap;
 }
 
