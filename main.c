@@ -14,9 +14,9 @@
 int main()
 {
     PBook book, node, bookStack, tempStack;
-    PBorrow borrow, borrowNode, borrowStack, borrowStackNode, borrowStackNodeBegin;
+    PBorrow borrow, borrowNode, borrowStack, borrowStackNode;
     char input[MAXWORDS], bookname[MAXWORDS], author[MAXWORDS];
-    int index, number, id, date, option, choice, dateSeconds, counter=0;
+    int index, number, id, date, option, choice, dateSeconds;
     time_t temp;
     borrowStack = initBorrow();
     borrow = initBorrow();
@@ -220,7 +220,6 @@ int main()
         //归还书籍
         else if (strcmp(input, "6") == 0)
         {
-        label5:
             printf("请输入要归还的书的书名: ");
             //bookname = getString();
             safetyScanfString(bookname);

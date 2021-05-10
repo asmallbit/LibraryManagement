@@ -5,6 +5,10 @@
 #include <string.h>
 #include <time.h>
 
+# ifndef MAXWORDS
+# define MAXWORDS 100
+# endif
+
 //日期处理,确认输入是否为真正的日期
 int isTrueDate(int x);
 //确认一个时间段内有多少个闰年
