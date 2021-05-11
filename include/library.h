@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#ifndef BORROW_H
 
 //定义图书的结构体
 struct Book;
@@ -17,15 +16,13 @@ struct Book
 };
 typedef struct Book *PBook;
 
-//#endif
-
 //初始化图书馆的书
-PBook initBook(int namel, int authorl);
+PBook initBook(int namelen, int authorlen);
 //图书入库
 int getStock(PBook p, int index, char *name, char *author, int num);
 //根据书名获取图书的信息
 PBookNode getIndexBookName(PBook p, char *name);
-//将符合条件的查询结果入栈(针对书)
+//将符合条件的书查询结果入栈
 int pushBook(PBook p, PBookNode node);
 //根据作者获取图书信息(配合函数pushBook()使用,因为作者和书可能存在一对多的关系)
 PBookNode getIndexAuthor(PBook p, PBook stack, char *author);
@@ -37,7 +34,7 @@ int popBook(PBook p);
 void printBooks(PBook p);
 //打印单个图书信息
 void printABook(PBookNode p);
-//释放关于书指针
+//释放关于书的指针
 void freePBook(PBook p);
 
 #endif

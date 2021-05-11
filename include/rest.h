@@ -31,9 +31,9 @@ int intToTime(int num);
 int timeToInt(int date);
 //输入处理
 char *getString(void);
-//scanf的安全替代,仅针对整形
+//scanf的安全替代,仅针对整形,相对于scanf而言,清空了输入缓存
 void safetyScanf(int* in);
-//针对字符串的输入
+//针对字符串的输入,其实就是fgets
 void safetyScanfString(char* str);
 
 #endif

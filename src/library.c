@@ -1,21 +1,20 @@
 #include "../include/library.h"
-#include <stdio.h>
 
 //初始化图书馆的书
-PBook initBook(int namel, int authorl)
+PBook initBook(int namelen, int authorlen)
 {
     PBook new;
     new = (PBook)malloc(sizeof(struct Book));
     if (new != NULL)
     {
-        new->bookName = (char *)malloc(sizeof(char) * (namel + 1));
+        new->bookName = (char *)malloc(sizeof(char) * (namelen + 1));
         if (new->bookName == NULL)
         {
             printf("Out of space!\n");
             free(new);
             return NULL;
         }
-        new->author = (char *)malloc(sizeof(char) * (authorl));
+        new->author = (char *)malloc(sizeof(char) * (authorlen));
         if (new->author == NULL)
         {
             printf("Out of space!\n");

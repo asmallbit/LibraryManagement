@@ -1,6 +1,6 @@
 #include "../include/borrow.h"
 
-//初始化学生借书
+//学生借书记录  初始化
 PBorrow initBorrow(void)
 {
     PBorrow new;
@@ -9,8 +9,8 @@ PBorrow initBorrow(void)
     {
         new->book.next = NULL;
         new->next = NULL;
-        new->book.author = (char *)malloc(sizeof(char) * 30);
-        new->book.bookName = (char *)malloc(sizeof(char) * 30);
+        new->book.author = (char *)malloc(sizeof(char) * MAXWORDS);
+        new->book.bookName = (char *)malloc(sizeof(char) * MAXWORDS);
         if (new->book.author != NULL &&new->book.bookName != NULL)
         {
             return new;
@@ -39,12 +39,6 @@ int getBorrow(PBook p, PBorrow pb, char *bookname, int id, int date, int index, 
     {
         book = getIndexBookName(p, bookname);
     }
-    //实现过程过于繁琐,暂时放弃,日后补充
-    /*
-    else if(option==2){
-        book = getIndexAuthor(p, author);
-    }
-    */
     else if (option == 2)
     {
         book = getIndexIndex(p, index);
@@ -92,7 +86,7 @@ int pushBorrower(PBorrow p, PBorrowNode node)
     return 1;
 }
 
-//存借书的人    出栈
+//用于存借书的人的栈的出栈操作
 int popBorrower(PBorrow p)
 {
     PBorrowNode temp;
@@ -133,7 +127,7 @@ int delBorrower(PBorrow p, char *bookname, int id)
     return 1;
 }
 
-//归还
+//归还书籍
 int getRestore(PBook p, PBorrow pb, char *bookname, int id, int date)
 {
     int flag = 0;

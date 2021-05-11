@@ -1,9 +1,6 @@
 #include "include/borrow.h"
 #include "include/library.h"
 #include "include/rest.h"
-//#include "../include/borrow.h"
-//#include "../include/library.h"
-//#include "../include/rest.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -131,7 +128,7 @@ int main()
                 //scanf("%d", &id);
                 safetyScanf(&id);
             label3:
-                printf("请输入你计划的归还日期(8位数, 如20210101代表2020年1月1日): ");
+                printf("请输入你计划的归还日期(8位数, 如20210101代表202１年1月1日): ");
                 //scanf("%d", &date);
                 safetyScanf(&date);
                 if (!isTrueDate(date))
@@ -272,7 +269,7 @@ int main()
             }
             if(borrowStack->next!=NULL) {
                 //释放掉borrowStackNode
-                freePBorrow(borrowStack);
+                freePBorrow(borrowStack->next);
                 borrowStack->next = NULL;
             }
         }
